@@ -1,0 +1,15 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Enclave Meta Database",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "enclave_db",
+      "Username": "enclave_user",
+      "Password": "enclave_password",
+      "SSLMode": "prefer",
+      "Favourite": true
+    }
+  }
+}

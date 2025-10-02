@@ -88,5 +88,58 @@ services:
     networks:
       - internal
 
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=enclave_db
+      - POSTGRES_USER=enclave_user
+      - POSTGRES_PASSWORD=enclave_password
+    volumes:
+      - ./enclData/postgres:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - internal
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+      - PGADMIN_CONFIG_CHECK_EMAIL_DELIVERABILITY=False
+    volumes:
+      - ./enclData/pgadmin:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json:ro
+    expose:
+      - 80
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - ./enclData/redis:/data
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    networks:
+      - internal
+
 networks:
   internal:
