@@ -94,7 +94,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "sum(count_over_time({app=\"docker\"} |= `info` or `inf` or `Info` or `Inf` or `INF` or `INFO` or `` [$__auto]))",
+          "expr": "sum(count_over_time({app=\"docker\"} |~ `(?i)info` or `(?i)inf` [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -150,7 +150,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "sum(count_over_time({app=\"docker\"} |= `warn` or `warning` or `Warning` or `Warn` or `WARN` or `WARNING` [$__auto]))",
+          "expr": "sum(count_over_time({app=\"docker\"} |~ `(?i)warn` or `(?i)warning` [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -210,7 +210,7 @@
           },
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "sum(count_over_time({app=\"docker\"} |= `error` or `Error` or `ERROR` or `Err` or `ERR` [$__auto]))",
+          "expr": "sum(count_over_time({app=\"docker\"} |~ `(?i)error` or `(?i)err` [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
