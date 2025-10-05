@@ -1,0 +1,169 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 0,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1>Enclave Developer Launchpad</h1>\n<p align=\"center\">\n    <img src=\"https://github.com/EnclaveRunner/.github/raw/main/img/enclave-logo.png\" alt=\"Description of image\" width=\"200\"/>\n</p>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 4,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"http://localhost:9090\" target=\"_blank\"\n   style=\"display: inline-block; width: 180px; height: 180px; margin: 12px; padding: 16px; box-sizing: border-box; background-color: #1e1e1e; border-radius: 12px; text-align: center; text-decoration: none; color: #f0f0f0; font-family: 'Segoe UI', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;\"\n   onmouseover=\"this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.6)';\"\n   onmouseout=\"this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.4)';\">\n\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/1033px-Prometheus_software_logo.svg.png\" alt=\"Service Logo\"\n       style=\"width: 64px; height: 64px; margin-bottom: 14px; border-radius: 8px;\">\n\n  <div style=\"font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 4px;\">\n    Prometheus\n  </div>\n\n  <div style=\"font-size: 12px; color: #999999;\">\n    Click to open\n  </div>\n</a>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 8,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"http://localhost:5050\" target=\"_blank\"\n   style=\"display: inline-block; width: 180px; height: 180px; margin: 12px; padding: 16px; box-sizing: border-box; background-color: #1e1e1e; border-radius: 12px; text-align: center; text-decoration: none; color: #f0f0f0; font-family: 'Segoe UI', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;\"\n   onmouseover=\"this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.6)';\"\n   onmouseout=\"this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.4)';\">\n\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1163px-Postgresql_elephant.svg.png\" alt=\"Service Logo\"\n       style=\"width: 64px; height: 64px; margin-bottom: 14px; border-radius: 8px;\">\n\n  <div style=\"font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 4px;\">\n    Postgres Admin\n  </div>\n\n  <div style=\"font-size: 12px; color: #999999;\">\n    Click to open\n  </div>\n</a>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"http://localhost:8080\" target=\"_blank\"\n   style=\"display: inline-block; width: 180px; height: 180px; margin: 12px; padding: 16px; box-sizing: border-box; background-color: #1e1e1e; border-radius: 12px; text-align: center; text-decoration: none; color: #f0f0f0; font-family: 'Segoe UI', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;\"\n   onmouseover=\"this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.6)';\"\n   onmouseout=\"this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.4)';\">\n\n  <img src=\"https://images.chainguard.dev/logos/cadvisor.svg\" alt=\"Service Logo\"\n       style=\"width: 64px; height: 64px; margin-bottom: 14px; border-radius: 8px;\">\n\n  <div style=\"font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 4px;\">\n    cAdvisor\n  </div>\n\n  <div style=\"font-size: 12px; color: #999999;\">\n    Click to open\n  </div>\n</a>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 16,
+        "y": 7
+      },
+      "id": 5,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"http://localhost:12345\" target=\"_blank\"\n   style=\"display: inline-block; width: 180px; height: 180px; margin: 12px; padding: 16px; box-sizing: border-box; background-color: #1e1e1e; border-radius: 12px; text-align: center; text-decoration: none; color: #f0f0f0; font-family: 'Segoe UI', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;\"\n   onmouseover=\"this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.6)';\"\n   onmouseout=\"this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.4)';\">\n\n  <img src=\"https://grafana.com/media/docs/alloy/alloy_icon.png\" alt=\"Service Logo\"\n       style=\"width: 64px; height: 64px; margin-bottom: 14px; border-radius: 8px;\">\n\n  <div style=\"font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 4px;\">\n    Grafana Alloy\n  </div>\n\n  <div style=\"font-size: 12px; color: #999999;\">\n    Click to open\n  </div>\n</a>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Enclave Developer Launchpad",
+  "uid": "adtt8t5",
+  "version": 2
+}
