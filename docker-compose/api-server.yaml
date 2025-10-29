@@ -1,0 +1,14 @@
+port: 8080
+log_level: debug
+production_environment: true
+human_readable_output: true
+database:
+  host: postgres
+  port: 5432
+  user: enclave_user
+  password: enclave_password
+  database: enclave_db
+admin:
+  username: enclave
+  display_name: System
+  password: enclave
