@@ -157,7 +157,7 @@ services:
       - postgres
 
   web-ui:
-    image: ghcr.io/enclaverunner/web-ui:0.1
+    image: ghcr.io/enclaverunner/web-ui:0.2
     container_name: web-ui
     ports:
       - "8083:8091"
