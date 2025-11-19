@@ -1,0 +1,86 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=enclave_db
+      - POSTGRES_USER=enclave_user
+      - POSTGRES_PASSWORD=enclave_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - internal
+
+  api-server:
+    image: ghcr.io/enclaverunner/api-server:latest
+    container_name: api-server
+    restart: unless-stopped
+    expose:
+      - 8081
+    ports:
+      - 8081:8080
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    environment:
+      ENCLAVE_PORT: 8080
+      ENCLAVE_LOG_LEVEL: debug
+      ENCLAVE_PRODUCTION_ENVIRONMENT: "true"
+      ENCLAVE_HUMAN_READABLE_OUTPUT: "true"
+      ENCLAVE_DATABASE_HOST: postgres
+      ENCLAVE_DATABASE_PORT: 5432
+      ENCLAVE_DATABASE_USER: enclave_user
+      ENCLAVE_DATABASE_PASSWORD: enclave_password
+      ENCLAVE_DATABASE_NAME: enclave_db
+      ENCLAVE_ADMIN_USERNAME: enclave
+      ENCLAVE_ADMIN_DISPLAY_NAME: System
+      ENCLAVE_ADMIN_PASSWORD: enclave
+
+  web-ui:
+    image: ghcr.io/enclaverunner/web-ui:latest
+    container_name: web-ui
+    ports:
+      - "8083:8091"
+    environment:
+      - API_BASE_URL=api-server
+      - API_PORT=8080
+    networks:
+      - internal
+
+  artifact-registry:
+    image: ghcr.io/enclaverunner/artifact-registry:latest
+    container_name: artifact-registry
+    restart: unless-stopped
+    volumes:
+      - artifact_registry_data:/data
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    environment:
+      ENCLAVE_PORT: 5000
+      ENCLAVE_LOG_LEVEL: debug
+      ENCLAVE_PRODUCTION_ENVIRONMENT: "true"
+      ENCLAVE_HUMAN_READABLE_OUTPUT: "true"
+      ENCLAVE_DATABASE_HOST: postgres
+      ENCLAVE_DATABASE_PORT: 5432
+      ENCLAVE_DATABASE_USER: enclave_user
+      ENCLAVE_DATABASE_PASSWORD: enclave_password
+      ENCLAVE_DATABASE_NAME: enclave_db
+
+networks:
+  internal:
+
+volumes:
+  postgres_data:
+  artifact_registry_data:

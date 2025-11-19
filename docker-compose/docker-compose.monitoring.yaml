@@ -1,0 +1,120 @@
+services:
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning
+    user: "1000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_ANALYTICS_ENABLED=false
+    networks:
+      - internal
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    hostname: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+      - "--web.enable-admin-api"
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    user: "1000"
+    networks:
+      - internal
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    networks:
+      - internal
+
+  loki:
+    restart: unless-stopped
+    container_name: loki
+    image: grafana/loki:latest
+    expose:
+      - 3100
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yaml
+      - loki_data:/tmp/loki
+    user: "1000"
+    networks:
+      - internal
+
+  alloy:
+    restart: unless-stopped
+    container_name: alloy
+    hostname: alloy
+    image: grafana/alloy:latest
+    expose:
+      - 12345
+    ports:
+      - 12345:12345
+    command: "run --server.http.listen-addr=0.0.0.0:12345 --disable-reporting /etc/alloy/config.alloy"
+    volumes:
+      - ./config.alloy:/etc/alloy/config.alloy
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+      - PGADMIN_CONFIG_CHECK_EMAIL_DELIVERABILITY=False
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json:ro
+    expose:
+      - 80
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  grafana_data:
+  prometheus_data:
+  loki_data:
+  pgadmin_data:
