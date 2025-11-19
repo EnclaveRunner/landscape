@@ -142,7 +142,7 @@ services:
       - internal
 
   api-server:
-    image: ghcr.io/enclaverunner/api-server:0.3.1
+    image: ghcr.io/enclaverunner/api-server:0.5.1
     container_name: api-server
     restart: unless-stopped
     volumes:
