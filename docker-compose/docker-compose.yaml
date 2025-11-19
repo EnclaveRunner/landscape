@@ -1,6 +1,6 @@
 include:
   - docker-compose.enclave.yaml
-  - docker-compose.monitoring.yaml
+  #- docker-compose.monitoring.yaml
 
 networks:
   internal:
