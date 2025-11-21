@@ -20,6 +20,8 @@ services:
     image: valkey/valkey:latest
     expose:
       - 6379
+    networks:
+      - internal
     ports:
       - "6379:6379"
 
@@ -35,6 +37,9 @@ services:
       - internal
     depends_on:
       - postgres
+      - valkey
+      - runner
+      - artifact-registry
     environment:
       ENCLAVE_PORT: 8080
       ENCLAVE_LOG_LEVEL: debug
@@ -94,9 +99,11 @@ services:
     networks:
       - internal
     depends_on:
-      - api-server
       - artifact-registry
+      - valkey
     environment:
+      ENCLAVE_LOG_LEVEL: debug
+      ENCLAVE_HUMAN_READABLE_OUTPUT: "true"
       ENCLAVE_REDIS_HOST: valkey
       ENCLAVE_REDIS_PORT: 6379
       ENCLAVE_ARTIFACT_REGISTRY_HOST: artifact-registry
