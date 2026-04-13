@@ -1,0 +1,24 @@
+{{- if .Values.runner.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-runner
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-runner
+    spec:
+      containers:
+        - name: runner
+          image: "{{ .Values.runner.image }}"
+          env:
+            {{- range $key, $val := .Values.runner.environment }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+{{- end }}

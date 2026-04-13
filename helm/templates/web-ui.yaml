@@ -1,0 +1,38 @@
+{{- if .Values.webUi.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-web-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-web-ui
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-web-ui
+    spec:
+      containers:
+        - name: web-ui
+          image: "{{ .Values.webUi.image }}"
+          ports:
+            {{- toYaml .Values.webUi.ports | nindent 12 }}
+          env:
+            {{- range $key, $val := .Values.webUi.environment }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-web-ui
+spec:
+  selector:
+    app: {{ .Release.Name }}-web-ui
+  ports:
+    - protocol: TCP
+      port: 8091
+      targetPort: 8091
+{{- end }}
