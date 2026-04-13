@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runner
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: runner
+  template:
+    metadata:
+      labels:
+        app: runner
+    spec:
+      containers:
+        - name: runner
+          image: "{{ .Values.runner.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ENCLAVE_LOG_LEVEL
+              value: {{ .Values.runner.env.ENCLAVE_LOG_LEVEL | quote }}
+            - name: ENCLAVE_HUMAN_READABLE_OUTPUT
+              value: {{ .Values.runner.env.ENCLAVE_HUMAN_READABLE_OUTPUT | quote }}
+            - name: ENCLAVE_REDIS__HOST
+              value: {{ .Values.runner.env.ENCLAVE_REDIS__HOST | quote }}
+            - name: ENCLAVE_REDIS__PORT
+              value: {{ .Values.runner.env.ENCLAVE_REDIS__PORT | quote }}
+            - name: ENCLAVE_ARTIFACT_REGISTRY__HOST
+              value: {{ .Values.runner.env.ENCLAVE_ARTIFACT_REGISTRY__HOST | quote }}
+            - name: ENCLAVE_ARTIFACT_REGISTRY__PORT
+              value: {{ .Values.runner.env.ENCLAVE_ARTIFACT_REGISTRY__PORT | quote }}
+            - name: ENCLAVE_DATABASE__USERNAME
+              value: {{ .Values.runner.env.ENCLAVE_DATABASE__USERNAME | quote }}
+            - name: ENCLAVE_DATABASE__PASSWORD
+              value: {{ .Values.runner.env.ENCLAVE_DATABASE__PASSWORD | quote }}
+            - name: ENCLAVE_DATABASE__DB
+              value: {{ .Values.runner.env.ENCLAVE_DATABASE__DB | quote }}

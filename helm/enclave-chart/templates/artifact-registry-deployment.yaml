@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artifact-registry
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: artifact-registry
+  template:
+    metadata:
+      labels:
+        app: artifact-registry
+    spec:
+      containers:
+        - name: artifact-registry
+          image: "{{ .Values.artifactRegistry.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ENCLAVE_PORT
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_PORT | quote }}
+            - name: ENCLAVE_LOG_LEVEL
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_LOG_LEVEL | quote }}
+            - name: ENCLAVE_PRODUCTION_ENVIRONMENT
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_PRODUCTION_ENVIRONMENT | quote }}
+            - name: ENCLAVE_HUMAN_READABLE_OUTPUT
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_HUMAN_READABLE_OUTPUT | quote }}
+            - name: ENCLAVE_DATABASE_HOST
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_DATABASE_HOST | quote }}
+            - name: ENCLAVE_DATABASE_PORT
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_DATABASE_PORT | quote }}
+            - name: ENCLAVE_DATABASE_USER
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_DATABASE_USER | quote }}
+            - name: ENCLAVE_DATABASE_PASSWORD
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_DATABASE_PASSWORD | quote }}
+            - name: ENCLAVE_DATABASE_NAME
+              value: {{ .Values.artifactRegistry.env.ENCLAVE_DATABASE_NAME | quote }}
+          ports:
+            - containerPort: 5000

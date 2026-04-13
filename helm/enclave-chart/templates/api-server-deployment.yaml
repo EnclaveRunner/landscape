@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: api-server
+  template:
+    metadata:
+      labels:
+        app: api-server
+    spec:
+      containers:
+        - name: api-server
+          image: "{{ .Values.apiServer.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ENCLAVE_PORT
+              value: {{ .Values.apiServer.env.ENCLAVE_PORT | quote }}
+            - name: ENCLAVE_LOG_LEVEL
+              value: {{ .Values.apiServer.env.ENCLAVE_LOG_LEVEL | quote }}
+            - name: ENCLAVE_PRODUCTION_ENVIRONMENT
+              value: {{ .Values.apiServer.env.ENCLAVE_PRODUCTION_ENVIRONMENT | quote }}
+            - name: ENCLAVE_HUMAN_READABLE_OUTPUT
+              value: {{ .Values.apiServer.env.ENCLAVE_HUMAN_READABLE_OUTPUT | quote }}
+            - name: ENCLAVE_REDIS_HOST
+              value: {{ .Values.apiServer.env.ENCLAVE_REDIS_HOST | quote }}
+            - name: ENCLAVE_DATABASE_HOST
+              value: {{ .Values.apiServer.env.ENCLAVE_DATABASE_HOST | quote }}
+            - name: ENCLAVE_DATABASE_PORT
+              value: {{ .Values.apiServer.env.ENCLAVE_DATABASE_PORT | quote }}
+            - name: ENCLAVE_DATABASE_USER
+              value: {{ .Values.apiServer.env.ENCLAVE_DATABASE_USER | quote }}
+            - name: ENCLAVE_DATABASE_PASSWORD
+              value: {{ .Values.apiServer.env.ENCLAVE_DATABASE_PASSWORD | quote }}
+            - name: ENCLAVE_DATABASE_NAME
+              value: {{ .Values.apiServer.env.ENCLAVE_DATABASE_NAME | quote }}
+            - name: ENCLAVE_ADMIN_USERNAME
+              value: {{ .Values.apiServer.env.ENCLAVE_ADMIN_USERNAME | quote }}
+            - name: ENCLAVE_ADMIN_DISPLAY_NAME
+              value: {{ .Values.apiServer.env.ENCLAVE_ADMIN_DISPLAY_NAME | quote }}
+            - name: ENCLAVE_ADMIN_PASSWORD
+              value: {{ .Values.apiServer.env.ENCLAVE_ADMIN_PASSWORD | quote }}
+            - name: ENCLAVE_ARTIFACT_REGISTRY_HOST
+              value: {{ .Values.apiServer.env.ENCLAVE_ARTIFACT_REGISTRY_HOST | quote }}
+            - name: ENCLAVE_ARTIFACT_REGISTRY_PORT
+              value: {{ .Values.apiServer.env.ENCLAVE_ARTIFACT_REGISTRY_PORT | quote }}
+          ports:
+            - containerPort: 8080
